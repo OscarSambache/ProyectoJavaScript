@@ -1,0 +1,14 @@
+.margen{
+  margin-top: 20px;
+}
+
+.barra{
+  background-color: black;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.color{
+  color: cadetblue;
+}

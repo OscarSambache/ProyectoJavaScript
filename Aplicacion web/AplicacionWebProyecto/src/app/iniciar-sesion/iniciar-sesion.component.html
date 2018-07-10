@@ -1,0 +1,69 @@
+<app-encabezado></app-encabezado>
+<br>
+
+<form [formGroup]="LogginForm"  novalidate>
+  <h1 class="text-center color"> INICIAR SESION</h1>
+
+
+
+
+  <div style="width: 20%; margin-left: auto; margin-right: auto; text-align: center">
+    <div *ngIf="passworsCorrecto==false" class="alert alert-danger">
+      Email o Contraseña incorrecto
+    </div>
+
+    <div class="form-group">
+      <span class="ui-float-label margen" >
+        <input pInputText id="id_email" type="text" #textoEmail size="30" class="form-control" formControlName="email">
+        <label for="id_email">Email</label>
+      </span>
+
+      <div *ngIf="LogginForm.get('email').errors &&LogginForm.get('email').dirty" class="alert alert-danger">
+        <div *ngIf="LogginForm.get('email').errors['required']">
+          Email requerido
+        </div>
+        <div *ngIf="LogginForm.get('email').errors['email']">
+          Email incorrecto
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <span class="ui-float-label margen" >
+        <input id="id_password" #textoPassword type="password" size="30" class="form-control" formControlName="password"  pInputText>
+        <label for="id_password">Contraseña</label>
+      </span>
+
+      <div *ngIf="LogginForm.get('password').errors &&LogginForm.get('password').dirty" class="alert alert-danger">
+        <div *ngIf="LogginForm.get('password').errors['required']">
+          Password requerido
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="text-center">
+    <button  pButton type="button" label="Iniciar Sesion"  type="submit" class="btn btn-primary btn-block" [disabled]="!LogginForm.valid "
+             class="ui-button-success margen text-center"
+             (click)="getUser(textoEmail.value, textoPassword.value)"
+    ></button>
+    <br>
+  </div>
+  <br>
+
+  <p class="text-center">
+    <a routerLink="/recuperar_password">Olvidaste tu contraseña</a>
+  </p>
+
+  <p class="margen text-center">¿No tienes una cuenta?
+    <a routerLink="/registro">  Registrate
+    </a>
+  </p>
+
+</form>
+
+

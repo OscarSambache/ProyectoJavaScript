@@ -1,0 +1,9 @@
+.color{
+  color: cadetblue;
+}
+.barra{
+  background-color: black;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}

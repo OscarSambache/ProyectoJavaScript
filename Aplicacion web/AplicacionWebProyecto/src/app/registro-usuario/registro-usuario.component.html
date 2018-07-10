@@ -1,0 +1,152 @@
+<app-encabezado></app-encabezado>
+<br>
+<form [formGroup]="RegistroForm" (ngSubmit)="submit()" novalidate>
+  <h1 class="text-center color"> REGISTRO DE USUARIO</h1>
+
+  <div style="width: 20%; margin-left: auto; margin-right: auto; text-align: center">
+
+   <div class="form-group">
+      <span class="ui-float-label margen" >
+        <input pInputText id="id_nombre" #textoNombre type="text"  size="30" class="form-control" formControlName="nombre">
+        <label for="id_nombre">Nombre</label>
+      </span>
+
+     <div *ngIf="RegistroForm.get('nombre').errors &&RegistroForm.get('nombre').dirty" class="alert alert-danger" size="30">
+       <div *ngIf="RegistroForm.get('nombre').errors['required']" size="30">
+         Nombre requerido
+       </div>
+     </div>
+   </div>
+
+    <div class="form-group">
+      <span class="ui-float-label margen" >
+        <input pInputText id="id_email" type="text" #textoEmail size="30" class="form-control" formControlName="email">
+        <label for="id_email">Email</label>
+      </span>
+
+      <div *ngIf="RegistroForm.get('email').errors &&RegistroForm.get('email').dirty" class="alert alert-danger">
+        <div *ngIf="RegistroForm.get('email').errors['required']">
+          Email requerido
+        </div>
+        <div *ngIf="RegistroForm.get('email').errors['email']">
+          Email incorrecto
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <span class="ui-float-label margen" >
+          <input pInputText id="id_confirmar_email" type="text" #textoConfirmarEmail size="30" class="form-control" formControlName="confirmarEmail">
+          <label for="id_confirmar_email">ConfirmarEmail</label>
+        </span>
+
+      <div *ngIf="RegistroForm.get('confirmarEmail').errors &&RegistroForm.get('confirmarEmail').dirty" class="alert alert-danger">
+        <div *ngIf="RegistroForm.get('confirmarEmail').errors['required']">
+          Email requerido
+        </div>
+        <div *ngIf="RegistroForm.get('confirmarEmail').errors['email']">
+          Email incorrecto
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="RegistroForm.get('confirmarEmail').value !=RegistroForm.get('email').value &&RegistroForm.get('confirmarEmail').dirty" class="alert alert-danger">
+      los emails no coinciden
+    </div>
+
+    <div class="form-group">
+      <span class="ui-float-label margen" >
+        <input id="id_password" #textoPassword type="password" size="30" class="form-control" formControlName="password" pInputText>
+        <label for="id_password">Contraseña</label>
+      </span>
+
+      <div *ngIf="RegistroForm.get('password').errors &&RegistroForm.get('password').dirty" class="alert alert-danger">
+        <div *ngIf="RegistroForm.get('password').errors['required']">
+          Password requerido
+        </div>
+        <div *ngIf="RegistroForm.get('password').errors['minlength']">
+          Password inseguro
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+       <span class="ui-float-label margen" >
+         <input id="id_confirmar_password" #textoConfirmarPassword type="password" size="30" formControlName="confirmarPassword" pInputText  pInputText>
+         <label for="id_confirmar_password">Confirmar Contraseña</label>
+       </span>
+
+      <div *ngIf="RegistroForm.get('confirmarPassword').errors &&RegistroForm.get('confirmarPassword').dirty" class="alert alert-danger">
+        <div *ngIf="RegistroForm.get('confirmarPassword').errors['required']">
+          Password requerido
+        </div>
+        <div *ngIf="RegistroForm.get('confirmarPassword').errors['minlength']">
+          Password inseguro
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="RegistroForm.get('confirmarPassword').value !=RegistroForm.get('password').value &&RegistroForm.get('confirmarPassword').dirty" class="alert alert-danger">
+      las contraseñas no coinciden
+    </div>
+
+    <div class="form-group">
+        <span class="ui-float-label margen" >
+          <input pInputText id="id_direccion" type="text" #textoDireccion size="30" class="form-control" formControlName="direccion">
+          <label for="id_direccion">Direccion</label>
+        </span>
+
+      <div *ngIf="RegistroForm.get('direccion').errors &&RegistroForm.get('direccion').dirty" class="alert alert-danger" size="30">
+        <div *ngIf="RegistroForm.get('direccion').errors['required']" size="30">
+          Direccion requerida
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <span class="ui-float-label margen" >
+        <input pInputText id="id_Telefono" type="text" #textoTelefono size="30" class="form-control" formControlName="telefono">
+        <label for="id_Telefono">Telefono</label>
+      </span>
+
+
+      <div *ngIf="RegistroForm.get('telefono').errors &&RegistroForm.get('telefono').dirty" class="alert alert-danger">
+        <div *ngIf="RegistroForm.get('telefono').errors['required']">
+          Teléfono requerido
+        </div>
+        <div *ngIf="RegistroForm.get('telefono').errors['phoneNumber']">
+          Teléfono incorrecto
+        </div>
+        <div *ngIf="RegistroForm.get('telefono').errors['pattern']">
+          Patrón teléfono incorrecto
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="text-center">
+    <button  pButton type="button" label="Registrar" type="submit" class="btn btn-primary btn-block" [disabled]="!RegistroForm.valid"
+             class="ui-button-success margen text-center"
+             (click)="agregarUsuario(textoNombre.value, textoEmail.value, textoPassword.value, textoDireccion.value, textoTelefono.value)">
+
+             <!--[disabled]="RegistroForm.get('confirmarPassword').value !=RegistroForm.get('password').value"-->
+             <!--[disabled]="RegistroForm.get('confirmarEmail').value !=RegistroForm.get('email').value"-->
+    </button>
+
+    <br>
+
+  </div>
+  <p class="margen text-center">¿Ya tienes una cuenta?
+    <a routerLink="/iniciar_sesion" >  Inicia Sesion
+    </a>
+  </p>
+</form>
+
+
+
+
+
+
+

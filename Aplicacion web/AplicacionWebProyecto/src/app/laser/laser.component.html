@@ -1,0 +1,38 @@
+<br>
+
+
+  <h1 class="text-center color">AGREGAR LASER</h1>
+
+  <div class="margen " style="width: 20%; margin-left: auto; margin-right: auto">
+    <div class="margen">
+      <p class="-align-leftl"> Lugar: </p>
+      <p-dropdown class="margen" [options]="arregloLugares" [(ngModel)]="selectedLugar1" (onChange)="cambioLugar($event)"  ></p-dropdown>
+    </div>
+
+    <div class="margen">
+      <p class="-align-leftl"> Seccion: </p>
+      <p-dropdown class="margen" [options]="arregloSecciones" [(ngModel)]="selectedSeccion" ></p-dropdown>
+    </div>
+
+  </div>
+
+
+  <div style="width: 20%; margin-left: auto; margin-right: auto; text-align: center">
+      <span class="ui-float-label margen" >
+        <input id="id_nombrelaser" #textoNombreLaser type="text" size="30" pInputText>
+        <label for="id_nombrelaser">Nombre Laser</label>
+      </span>
+  </div>
+
+  <div class="margen text-center">
+    <button  pButton type="button" label="Agregar"
+             class="ui-button-success margen text-center">
+    </button>
+  </div>
+
+
+
+
+
+
+
