@@ -8,6 +8,7 @@ import {of} from "rxjs/observable/of";
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 @Injectable()
+
 export class LugarService {
 
   private url: string = 'http://localhost:1337/Lugar';

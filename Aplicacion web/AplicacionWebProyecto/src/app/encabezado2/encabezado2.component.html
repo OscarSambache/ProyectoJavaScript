@@ -4,10 +4,55 @@
     <a class="color" routerLink=""> SISTEMA DE ALARMA POR MEDIO DE LASER
     </a>
   </div>
-  <div class="sm-row-6" style="margin-left: 800px">
+<!--
+  <div class="sm-row-6 color" style="margin-left: 800px">
+
+      <a class="color" routerLink="" data-toggle="modal" data-target="#exampleModal"
+         >  {{usuario.nombre}}
+      </a>
+  </div>
+-->
+
+  <div class="sm-row-6 color" style="margin-left: 800px">
+
     <a class="color" routerLink=""
-    (click)="logout()"> Cerrar sesion
+       (click)="logout()"
+    >  {{usuario.nombre}}
     </a>
   </div>
 
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Datos Facturacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="nombre">Nombre</label>
+        <input #nombre type="email" class="form-control" id="nombre" placeholder="Nombre" value="{{usuario.nombre}}">
+        <br>
+        <label for="email">Email</label>
+        <input  #email type="email" class="form-control" id="email" placeholder="Email" value="{{usuario.email}}">
+        <br>
+        <label for="telefono">Telefono</label>
+        <input #telefono type="email" class="form-control" id="telefono" placeholder="Telefono" value="{{usuario.telefono}}">
+        <br>
+        <label for="direccion">Direccion</label>
+        <input #direccion type="email" class="form-control" id="direccion" placeholder="Nombre" value="{{usuario.direccion}}">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary"
+               >Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>

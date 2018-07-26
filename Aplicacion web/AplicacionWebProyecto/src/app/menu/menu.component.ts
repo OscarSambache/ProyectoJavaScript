@@ -15,10 +15,15 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  agregar(){
+  AgregarLaser(){
     const url = ['/menu/agregar_laser'];
     this._router.navigate(url);
 
+  }
+
+  ConfigurarAlarma(){
+    const url =['/menu/crear_alarma'];
+    this._router.navigate(url)
   }
 
 

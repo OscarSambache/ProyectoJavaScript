@@ -18,10 +18,7 @@ export class api_rest {
   getUser(email: string): Observable<Usuario> {
     email= "?email="+email
     const url = `${this.url}/${email}`;
-    return this.http.get<Usuario>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${email}`)),
-      catchError(this.handleError<Usuario>(`getUser id=${email}`))
-    );
+    return this.http.get<Usuario>(url);
   }
 
 

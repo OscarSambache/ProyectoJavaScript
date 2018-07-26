@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectItem} from "primeng/api";
 import {Usuario} from "../Modells/Usuario";
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LugarService} from "../Servicios/Lugar.service";
 import {Laser} from "../Modells/Laser";
 import {lugar} from "../Modells/lugar";
 import {Seccion} from "../Modells/Seccion";
+import {api_rest} from "../api_rest.service";
+import {LaserService} from "../Servicios/Laser.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -16,55 +19,113 @@ import {Seccion} from "../Modells/Seccion";
 export class LaserComponent implements OnInit {
 
 
-  lugar: lugar ;
+
   arregloLugares: SelectItem[];
   selectedLugar1: lugar;
-  seccion: Seccion;
   arregloSecciones: SelectItem[];
   selectedSeccion: Seccion;
-
-  LaserForm: FormGroup;
+  laser: Laser;
+  usuario: Usuario;
+  codigoLaser: string;
+  nombreLaser: string="";
 
 
   constructor(
-    public lugarService: LugarService
+    private lugarService: LugarService,
+    private UsuarioService: api_rest,
+    private LaserService: LaserService,
   )
    {
+     this.llenarDropdownLugar();
+     this.iniciarDropdownSeccion();
+     this.codigoLaser= this.crearCodigoLaser();
 
 
-
-     this.lugarService.getLugares().subscribe(data => {
-       //console.log(data);
-       this.arregloLugares=[];
-
-       data.map(lugar2 =>{
-         //console.log("lugar: ", lugar2.id)
-
-         this.arregloLugares.push({
-           label: lugar2.descripionLugar,
-           value: lugar2
-         })
-       })
-
-     })
-
-  }
+   }
 
   ngOnInit() {
   }
 
+
   cambioLugar(evento ){
-   //console.log(evento.value.Seccion);
-   this.arregloSecciones=[];
-   evento.value.Seccion.map( seccion => {
-     this.arregloSecciones.push({
-       label: seccion.descripionSeccion,
-       value: seccion
-     })
-   })
+    this.llenarDrodownSeccion(evento);
   }
 
 
+  crearLaser(){
+
+    this.UsuarioService.getUser(localStorage.getItem('email')).subscribe( usuario=>{
+      this.usuario=usuario[0];
+      this.laser= new Laser();
+      this.laser.seccionIdFK = this.selectedSeccion.id;
+      this.laser.nombreLaser= this.nombreLaser;
+      this.laser.estado= 'apagado';
+      this.laser.codigoLaser=  this.codigoLaser;
+      this.laser.usuarioIdFK= this.usuario.id;
+      console.log(this.laser)
+      this.limpiar();
+
+      this.LaserService.addLaser(this.laser).subscribe( laser=>{
+        console.log('laser guardado',laser);
+      })
+    })
+  }
+
+  crearCodigoLaser(): string{
+    let  chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (var i = 5; i > 0; --i) {
+      result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
+  }
+
+  limpiar(){
+    this.nombreLaser="";
+    this.codigoLaser=this.crearCodigoLaser();
+    this.llenarDropdownLugar();
+    this.iniciarDropdownSeccion();
+
+  }
+
+  llenarDropdownLugar(){
+    this.lugarService.getLugares().subscribe(data => {
+      this.arregloLugares=[];
+      this.arregloLugares.push({
+        label: 'seleccionar lugar',
+        value:  this.selectedLugar1
+      })
+
+      data.map(lugar2 =>{
+        this.arregloLugares.push({
+          label: lugar2.descripionLugar,
+          value: lugar2
+        })
+      })
+    })
+  }
+
+  llenarDrodownSeccion(evento){
+    this.arregloSecciones=[];
+    this.arregloSecciones.push({
+      label: 'seleccionar seccion',
+      value:  this.selectedSeccion
+    })
+    evento.value.Seccion.map( seccion => {
+      this.arregloSecciones.push({
+        label: seccion.descripionSeccion,
+        value: seccion
+      })
+    })
+  }
+
+  iniciarDropdownSeccion(){
+    this.arregloSecciones=[];
+    this.arregloSecciones.push({
+      label: 'seleccionar seccion',
+      value:  this.selectedSeccion
+    })
+  }
 }
 
 

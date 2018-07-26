@@ -1,5 +1,5 @@
 /**
- * Laser.js
+ * Alarma.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -9,12 +9,22 @@ module.exports = {
 
   attributes: {
 
-    codigoLaser:{
+    horaInicio:{
       type: 'string',
       required: true
     },
 
-    nombreLaser:{
+    minutoInicio:{
+      type: 'string',
+      required: true
+    },
+
+    horaFin:{
+      type: 'string',
+      required: true
+    },
+
+    minutoFin:{
       type: 'string',
       required: true
     },
@@ -24,18 +34,17 @@ module.exports = {
       required: true
     },
 
-    usuarioIdFK:{
-      model: 'Usuario'
+    laserIdFK:{
+      model: 'Laser'
     },
 
-    seccionIdFK:{
-      model: 'Seccion'
+
+    alarmasDias: {
+      collection: 'AlarmaDia',
+      via: 'alarmaIdFK'
     },
 
-    alarmas: {
-      collection: 'Alarma',
-      via: 'laserIdFK'
-    },
+
   },
 
 };

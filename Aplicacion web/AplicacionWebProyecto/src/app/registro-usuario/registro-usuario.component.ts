@@ -49,7 +49,6 @@ export class RegistroUsuarioComponent implements OnInit {
 
   }
 
-
   agregarUsuario(nombre: string, email:string, contrasenia: string, direccion:string, telefono: string){
 
     this.usuario = new Usuario();

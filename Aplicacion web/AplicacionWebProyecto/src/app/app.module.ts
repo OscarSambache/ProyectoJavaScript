@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ScheduleModule, DialogModule, CalendarModule, ToggleButtonModule, DragDropModule, ButtonModule, InputTextareaModule, CheckboxModule, InputTextModule, SelectButtonModule} from 'primeng/primeng';
+import {DialogModule, CalendarModule, ToggleButtonModule, DragDropModule, ButtonModule, InputTextareaModule, CheckboxModule, InputTextModule} from 'primeng/primeng';
 import {CardModule} from 'primeng/card';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {ScheduleModule} from 'primeng/schedule';
+import {SelectButtonModule} from 'primeng/selectbutton';
 import {SelectItem} from "primeng/api";
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +15,6 @@ import {RUTAS1_APP} from "./app.routes";
 import {HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-
 import { AppComponent } from './app.component';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
@@ -30,6 +31,11 @@ import {LoginGuard} from "./login.guard";
 import {InicioGuard} from "./inicio.guard";
 import { LaserComponent } from './laser/laser.component';
 import {LugarService} from "./Servicios/Lugar.service";
+import {EventService} from "./Servicios/EventService.service";
+import {LaserService} from "./Servicios/Laser.service";
+import {DiaService} from "./Servicios/Dia.service";
+import {AlarmaService} from "./Servicios/Alarma.service";
+import {AlarmaDiaService} from "./Servicios/AlarmaDia.service";
 
 @NgModule({
   declarations: [
@@ -64,14 +70,24 @@ import {LugarService} from "./Servicios/Lugar.service";
     ),
     HttpClientModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    ScheduleModule,
+    SelectButtonModule,
+
+
+
   ],
 
   providers: [
     api_rest,
     LoginGuard,
     InicioGuard,
-    LugarService
+    LugarService,
+    EventService,
+    LaserService,
+    DiaService,
+    AlarmaService,
+    AlarmaDiaService
   ],
   bootstrap: [AppComponent]
 })

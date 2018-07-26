@@ -1,6 +1,4 @@
 <br>
-
-
   <h1 class="text-center color">AGREGAR LASER</h1>
 
   <div class="margen " style="width: 20%; margin-left: auto; margin-right: auto">
@@ -16,19 +14,35 @@
 
   </div>
 
+    <div style="width: 20%; margin-left: auto; margin-right: auto; text-align: center">
+      <span class="ui-float-label margen" >
+        <input id="id_nombrelaser"  type="text" size="30" [(ngModel)]="nombreLaser" pInputText>
+        <label for="id_nombrelaser">Nombre Laser</label>
+      </span>
+      <div *ngIf="nombreLaser ==''" class="alert alert-danger" size="30">
+          Nombre requerido
+      </div>
+    </div>
 
   <div style="width: 20%; margin-left: auto; margin-right: auto; text-align: center">
       <span class="ui-float-label margen" >
-        <input id="id_nombrelaser" #textoNombreLaser type="text" size="30" pInputText>
-        <label for="id_nombrelaser">Nombre Laser</label>
+        <input id="id_codigoLaser" #codigoLasertxt  type="text" size="30" readonly value="{{codigoLaser}}" pInputText >
+        <label for="id_codigoLaser">Código Laser</label>
       </span>
   </div>
 
   <div class="margen text-center">
     <button  pButton type="button" label="Agregar"
-             class="ui-button-success margen text-center">
+             class="ui-button-success margen text-center"
+
+
+             [disabled]="nombreLaser =='' || selectedLugar1 ==undefined || selectedSeccion ==undefined"
+             (click)="crearLaser()">
     </button>
   </div>
+
+
+
 
 
 

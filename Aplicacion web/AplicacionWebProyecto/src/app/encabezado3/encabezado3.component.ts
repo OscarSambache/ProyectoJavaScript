@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Usuario} from "../Modells/Usuario";
+import {api_rest} from "../api_rest.service";
 
 @Component({
   selector: 'app-encabezado3',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Encabezado3Component implements OnInit {
 
-  constructor() { }
+  usuario: Usuario
+  constructor(private UsuarioServuce: api_rest) {
+    this.UsuarioServuce.getUser(localStorage.getItem('email'))
+  }
+
 
   ngOnInit() {
   }
