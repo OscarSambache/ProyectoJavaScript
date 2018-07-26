@@ -36,6 +36,11 @@ module.exports = {
       collection: 'Alarma',
       via: 'laserIdFK'
     },
+
+    alertas: {
+      collection: 'Alerta',
+      via: 'laserIdFK'
+    },
   },
 
 };
